@@ -6,13 +6,6 @@ app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 
-# @app.route('/')
-# def homepage():
-#     context = {'data': [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]}
-#     speed = 20
-#     return render_template('charts_echart_basic.html', context=context,speed=speed)
-
-
 
 @app.route('/')
 def homepage():
@@ -26,6 +19,8 @@ def homepage():
     mqtt = mqtt.Client()
     mqtt.tls_set(CA, CERTI, KEYFILE, cert_reqs = ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers = None)
     mqtt.connect("a40rhj9y53gub-ats.iot.us-east-2.amazonaws.com", 8883, 60)
+
+    calories, speed = 0, 0
 
     
     def on_connect(c, u, f, rc):
@@ -72,10 +67,13 @@ def homepage():
             met = get_met(speed)
             calories += 70 * met * (time_walk/360)
             print("Calories burned in walk %d",calories)
-        mqtt.on_connect = on_connect
-        mqtt.on_message = on_message
-        mqtt.loop_forever()
-    return render_template('charts_echart_basic.html')
+    mqtt.on_connect = on_connect
+    mqtt.loop_start()
+    mqtt.on_message = on_message
+    print(mqtt.on_message)
+
+    mqtt.loop_stop()
+    return render_template('charts_echart_basic.html', context=calories, speed=speed)
 
 def simple():
     sec = time.time()

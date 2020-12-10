@@ -212,7 +212,7 @@ hand.startWidth = 10;
 
 
 setInterval(function() {
-  hand.showValue(25, 1000, am4core.ease.cubicOut);
+  hand.showValue({{speed}}, 1000, am4core.ease.cubicOut);
   label.text = Math.round(hand.value).toString();
   hand2.showValue(Math.random() * 160, 1000, am4core.ease.cubicOut);
   label2.text = Math.round(hand2.value).toString();
@@ -513,7 +513,8 @@ option = {
                 {
                     name:'Walking',
                     type:'bar',
-                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    // data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    data:{{calories}}
                     markPoint : {
                         data : [
                             {type : 'max', name: 'The maximum value'},
