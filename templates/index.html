@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <link href="../../equation-10/equation/default/ltr/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../equation-10/equation/default/ltr/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <script src="echarts_basic.js"></script>
+    <script src="echarts_basic_script.js"></script>
+    <title>IOT</title>
+</head>
+<body>
+    <div class="row layout-spacing">
+        <div class="col-lg-12">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-header">                                
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <h4>Basic Column Chart</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div id="basic_chart" class="" style="height:400px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+<script src="../../equation-10/equation/default/ltr/assets/js/libs/jquery-3.1.1.min.js"></script>
+<script src="../../equation-10/equation/default/ltr/bootstrap/js/popper.min.js"></script>
+<script src="../../equation-10/equation/default/ltr/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../equation-10/equation/default/ltr/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="../../equation-10/equation/default/ltr/plugins/blockui/jquery.blockUI.min.js"></script>
+<script src="../../equation-10/equation/default/ltr/assets/js/app.js"></script>
+
+<script>
+    $(document).ready(function() {
+        App.init();
+    });
+</script>
+<script src="../../equation-10/equation/default/ltr/assets/js/custom.js"></script>
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="../../equation-10/equation/default/ltr/plugins/charts/echarts/basic-charts/echarts_basic.js"></script>
+<script src="../../equation-10/equation/default/ltr/plugins/charts/echarts/echarts.js"></script>
+<script src="../../equation-10/equation/default/ltr/plugins/charts/echarts/basic-charts/timelineOption.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<!--  BEGIN CUSTOM STYLE FILE  -->
+<script src="../../equation-10/equation/default/ltr/plugins/charts/echarts/basic-charts/echarts_basic_script.js"></script>
+<script>
+    // Initialize after dom ready
+    var chartThermo = echarts.init(document.getElementById('thermo_chart')); 
+    
+    option = {
+       
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效 --- Axis indicator, coordinate trigger effective
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow' --- The default is a straight line, select: 'line' | 'shadow'
+            },
+            formatter: function (params){
+                return params[0].name + '<br/>'
+                       + params[0].seriesName + ' : ' + params[0].value + '<br/>'
+                       + params[1].seriesName + ' : ' + (params[1].value + params[0].value);
+            }
+        },
+        legend: {
+            selectedMode:false,
+            data:['Acutal', 'Forecast']
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                data : ['Cosco','CMA','APL','OOCL','Wanhai','Zim']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                boundaryGap: [0, 0.1]
+            }
+        ],
+        series : [
+            {
+                name:'Acutal',
+                type:'bar',
+                stack: 'sum',
+                barCategoryGap: '50%',
+                itemStyle: {
+                    normal: {
+                        color: '#18d17f',
+                        barBorderColor: '#18d17f',
+                        barBorderWidth: 6,
+                        barBorderRadius:0,
+                        label : {
+                            show: true, position: 'insideTop'
+                        }
+                    }
+                },
+                data:[260, 200, 220, 120, 100, 80]
+            },
+            {
+                name:'Forecast',
+                type:'bar',
+                stack: 'sum',
+                itemStyle: {
+                    normal: {
+                        color: '#fff',
+                        barBorderColor: '#18d17f',
+                        barBorderWidth: 6,
+                        barBorderRadius:0,
+                        label : {
+                            show: true, 
+                            position: 'top',
+                            formatter: function (params) {
+                                for (var i = 0, l = option.xAxis[0].data.length; i < l; i++) {
+                                    if (option.xAxis[0].data[i] == params.name) {
+                                        return option.series[0].data[i] + params.value;
+                                    }
+                                }
+                            },
+                            textStyle: {
+                                color: '#18d17f'
+                            }
+                        }
+                    }
+                },
+                data:[40, 80, 50, 80,80, 70]
+            }
+        ]
+    };
+
+    // Load data into the ECharts instance 
+    chartThermo.setOption(option); 
+
+    $(window).on('resize', function(){
+        if(chartThermo != null && chartThermo != undefined){
+            chartThermo.resize();
+        }
+    });
+</script>
+<!--  END CUSTOM STYLE FILE  -->
+
+</body>
+</html>

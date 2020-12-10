@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Basic eCharts | Equation - Multipurpose Bootstrap Dashboard Template </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='default/ltr/assets/img/favicon.ico') }}"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <link href="{{ url_for('static', filename='default/ltr/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='default/ltr/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->   
+    
+</head>
+<body>
+    <!-- Tab Mobile View Header -->
+    <!-- <header class="tabMobileView header navbar fixed-top d-lg-none">
+        <div class="nav-toggle">
+                <a href="javascript:void(0);" class="nav-link sidebarCollapse" data-placement="bottom">
+                    <i class="flaticon-menu-line-2"></i>
+                </a>
+            <a href="index.html" class=""> <img src="assets/img/logo-3.png" class="img-fluid" alt="logo"></a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="nav-item d-lg-none"> 
+                <form class="form-inline justify-content-end" role="search">
+                    <input type="text" class="form-control search-form-control mr-3">
+                </form>
+            </li>
+        </ul>
+    </header> -->
+    <!-- Tab Mobile View Header -->
+        <!--  BEGIN CONTENT PART  -->
+        <div id="content" class="main-content">
+            <div class="container">
+                <!-- <div class="page-header">
+                    <div class="page-title">
+                        <h3>Basic</h3>
+                        <div class="crumbs">
+                            <ul id="breadcrumbs" class="breadcrumb">
+                                <li><a href="index.html"><i class="flaticon-home-fill"></i></a></li>
+                                <li><a href="#">Charts</a></li>
+                                <li><a href="#">eCharts</a></li>
+                                <li class="active"><a href="#">Basic</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <div class="row layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">                                
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Basic Column Chart</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div id="basic_chart" class="" style="height:400px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">                                
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Ladder Waterfall Map Chart</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div id="ladder_chart" class="" style="height:400px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row  layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">                                
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Stacked Column Chart</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div id="stack_chart" class="" style="height:400px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">                                
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Thermometer Chart</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div id="thermo_chart" class="" style="height:400px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row  layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">                                
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Timeline Chart</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div id="timeline" class="" style="height:400px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  END CONTENT PART  -->
+    </div>
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{{ url_for('static', filename='default/ltr/assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='default/ltr/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='default/ltr/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='default/ltr/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='default/ltr/plugins/blockui/jquery.blockUI.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='default/ltr/assets/js/app.js') }}"></script>
+    
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="assets/js/custom.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{ url_for('static', filename='default/ltr/plugins/charts/echarts/basic-charts/echarts_basic.js') }}"></script>
+    <script src="{{ url_for('static', filename='default/ltr/plugins/charts/echarts/echarts.js') }}"></script>
+    <script src="{{ url_for('static', filename='default/ltr/plugins/charts/echarts/basic-charts/timelineOption.js') }}"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    <!--  BEGIN CUSTOM STYLE FILE  -->
+    <script src="{{ url_for('static', filename='default/ltr/plugins/charts/echarts/basic-charts/echarts_basic_script.js') }}"></script>
+    <script>
+        // Initialize after dom ready
+        var chartThermo = echarts.init(document.getElementById('thermo_chart')); 
+        
+        option = {
+           
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效 --- Axis indicator, coordinate trigger effective
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow' --- The default is a straight line, select: 'line' | 'shadow'
+                },
+                formatter: function (params){
+                    return params[0].name + '<br/>'
+                           + params[0].seriesName + ' : ' + params[0].value + '<br/>'
+                           + params[1].seriesName + ' : ' + (params[1].value + params[0].value);
+                }
+            },
+            legend: {
+                selectedMode:false,
+                data:['Acutal', 'Forecast']
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['Cosco','CMA','APL','OOCL','Wanhai','Zim']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    boundaryGap: [0, 0.1]
+                }
+            ],
+            series : [
+                {
+                    name:'Acutal',
+                    type:'bar',
+                    stack: 'sum',
+                    barCategoryGap: '50%',
+                    itemStyle: {
+                        normal: {
+                            color: '#18d17f',
+                            barBorderColor: '#18d17f',
+                            barBorderWidth: 6,
+                            barBorderRadius:0,
+                            label : {
+                                show: true, position: 'insideTop'
+                            }
+                        }
+                    },
+                    data:[260, 200, 220, 120, 100, 80]
+                },
+                {
+                    name:'Forecast',
+                    type:'bar',
+                    stack: 'sum',
+                    itemStyle: {
+                        normal: {
+                            color: '#fff',
+                            barBorderColor: '#18d17f',
+                            barBorderWidth: 6,
+                            barBorderRadius:0,
+                            label : {
+                                show: true, 
+                                position: 'top',
+                                formatter: function (params) {
+                                    for (var i = 0, l = option.xAxis[0].data.length; i < l; i++) {
+                                        if (option.xAxis[0].data[i] == params.name) {
+                                            return option.series[0].data[i] + params.value;
+                                        }
+                                    }
+                                },
+                                textStyle: {
+                                    color: '#18d17f'
+                                }
+                            }
+                        }
+                    },
+                    data:[40, 80, 50, 80,80, 70]
+                }
+            ]
+        };
+
+        // Load data into the ECharts instance 
+        chartThermo.setOption(option); 
+
+        $(window).on('resize', function(){
+            if(chartThermo != null && chartThermo != undefined){
+                chartThermo.resize();
+            }
+        });
+
+
+
+
+
+
+
+
+        var chartBasic = echarts.init(document.getElementById('basic_chart')); 
+
+option = {
+            tooltip : {
+                trigger: 'axis'
+            },
+            color : [ "#6156ce", "#ee3d50"],
+            legend: {
+                data:['Walking','Running']
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'Walking',
+                    type:'bar',
+                    // data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    data:{{context['data']|tojson}},
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: 'The maximum value'},
+                            {type : 'min', name: 'Minimum value'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name: 'average value'}
+                        ]
+                    }
+                },
+                {
+                    name:'Running',
+                    type:'bar',
+                    data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                    markPoint : {
+                        data : [
+                            {name : 'The highest year', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
+                            {name : 'Year minimum', value : 2.3, xAxis: 11, yAxis: 3}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name : 'average value'}
+                        ]
+                    }
+                }
+            ]
+        };
+
+// Load data into the ECharts instance 
+chartBasic.setOption(option); 
+
+    $(window).on('resize', function(){
+    if(chartBasic != null && chartBasic != undefined){
+        chartBasic.resize();
+    }
+});
+    </script>
+    <!--  END CUSTOM STYLE FILE  -->
+
+    
+</body>
+</html>
