@@ -15,7 +15,19 @@
     <link href="{{ url_for('static', filename='default/ltr/assets/css/components/custom-counter.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='ctimer.css') }}" rel="stylesheet" type="text/css">
     
+    <!-- END GLOBAL MANDATORY STYLES -->
 </head>
+<style>
+    #chartdiv {
+  width: 100%;
+  height: 500px;
+}
+#chartdiv1 {
+  width: 100%;
+  height: 500px;
+}
+    </style>
+</style>
 <body>
     {{g.s}}
     <!-- Tab Mobile View Header -->
@@ -26,7 +38,7 @@
                 <div class="row layout-spacing">
                     <div class="col-lg-12">
                         <div class="statbox widget box box-shadow">
-                            <div class="widget-header">                                
+                            <div class="widget-header">
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                         <h4>Basic Column Chart</h4>
@@ -45,6 +57,67 @@
                             <div class="widget-content widget-content-area text-center circle-counter-container">
                                 <div class="row mb-5">
                                     <div id="ctimer"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-12 layout-spacing">
+                    <div class="statbox widget box box-shadow">
+                        <div class="widget-header">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                    <h4>Speedometer</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-content widget-content-area">
+                            <div class="row">
+                                <div class="col-lg-12 mb-4">
+                                    <div id="chartdiv"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Calories burned</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div id="chartdiv1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row  layout-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Timeline Chart</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div id="timeline" class="" style="height:400px"></div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -59,6 +132,136 @@
         <!--  END CONTENT PART  -->
     </div>
 
+
+        <!-- Resources -->
+        <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+        <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+        <!-- Chart code -->
+        <script>
+      am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv1", am4charts.PieChart3D);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+chart.legend = new am4charts.Legend();
+
+chart.data = [
+  {
+    country: "Walking",
+    litres: 1250
+  },
+
+  {
+    country: "Running",
+    litres: 2000
+  }
+];
+
+var series = chart.series.push(new am4charts.PieSeries3D());
+series.dataFields.value = "litres";
+series.dataFields.category = "country";
+        </script>
+
+
+        <script>
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// create chart
+var chart = am4core.create("chartdiv", am4charts.GaugeChart);
+chart.hiddenState.properties.opacity = 0;
+
+var axis = chart.xAxes.push(new am4charts.ValueAxis());
+axis.min = 0;
+axis.max = 50;
+axis.strictMinMax = true;
+axis.renderer.inside = true;
+//axis.renderer.ticks.template.inside = true;
+//axis.stroke = chart.colors.getIndex(3);
+axis.renderer.radius = am4core.percent(97);
+//axis.renderer.radius = 80;
+axis.renderer.line.strokeOpacity = 1;
+axis.renderer.line.strokeWidth = 5;
+axis.renderer.line.stroke = chart.colors.getIndex(0);
+axis.renderer.ticks.template.disabled = false
+axis.renderer.ticks.template.stroke = chart.colors.getIndex(0);
+axis.renderer.labels.template.radius = 35;
+axis.renderer.ticks.template.strokeOpacity = 1;
+axis.renderer.grid.template.disabled = true;
+axis.renderer.ticks.template.length = 10;
+axis.hiddenState.properties.opacity = 1;
+axis.hiddenState.properties.visible = true;
+axis.setStateOnChildren = true;
+axis.renderer.hiddenState.properties.endAngle = 180;
+
+var axis2 = chart.xAxes.push(new am4charts.ValueAxis());
+
+
+var hand = chart.hands.push(new am4charts.ClockHand());
+hand.fill = axis.renderer.line.stroke;
+hand.stroke = axis.renderer.line.stroke;
+hand.axis = axis;
+hand.pin.radius = 14;
+hand.startWidth = 10;
+
+
+
+setInterval(function() {
+  hand.showValue(25, 1000, am4core.ease.cubicOut);
+  label.text = Math.round(hand.value).toString();
+  hand2.showValue(Math.random() * 160, 1000, am4core.ease.cubicOut);
+  label2.text = Math.round(hand2.value).toString();
+}, 2000);
+
+var legend = new am4charts.Legend();
+legend.isMeasured = false;
+legend.y = am4core.percent(100);
+legend.verticalCenter = "bottom";
+legend.parent = chart.chartContainer;
+legend.data = [{
+  "name": "Speed",
+  "fill": chart.colors.getIndex(0)
+}, ];
+
+legend.itemContainers.template.events.on("hit", function(ev) {
+  var index = ev.target.dataItem.index;
+
+  if (!ev.target.isActive) {
+    chart.hands.getIndex(index).hide();
+    chart.xAxes.getIndex(index).hide();
+    labelList.getIndex(index).hide();
+  }
+  else {
+    chart.hands.getIndex(index).show();
+    chart.xAxes.getIndex(index).show();
+    labelList.getIndex(index).show();
+  }
+});
+
+var labelList = new am4core.ListTemplate(new am4core.Label());
+labelList.template.isMeasured = false;
+labelList.template.background.strokeWidth = 2;
+labelList.template.fontSize = 25;
+labelList.template.padding(10, 20, 10, 20);
+labelList.template.y = am4core.percent(50);
+labelList.template.horizontalCenter = "middle";
+
+var label = labelList.create();
+label.parent = chart.chartContainer;
+label.x = am4core.percent(40);
+label.background.stroke = chart.colors.getIndex(0);
+label.fill = chart.colors.getIndex(0);
+label.text = "0";
+        </script>
+
+        <!-- HTML -->
+
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{{ url_for('static', filename='default/ltr/assets/js/libs/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='default/ltr/bootstrap/js/popper.min.js') }}"></script>
@@ -66,7 +269,13 @@
     <script src="{{ url_for('static', filename='default/ltr/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script src="{{ url_for('static', filename='default/ltr/plugins/blockui/jquery.blockUI.min.js') }}"></script>
     <script src="{{ url_for('static', filename='default/ltr/assets/js/app.js') }}"></script>
-    
+    <script src="{{ url_for('static', filename='plugins/charts/amcharts/amcharts.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/charts/amcharts/radar.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/charts/amcharts/polarScatter.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/charts/amcharts/gauge.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/charts/amcharts/light.js') }}"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/responsive/responsive.min.js"></script>
+
     <script>
         /**
  * ---------------------------------------
@@ -180,6 +389,105 @@ setInterval(function() { makeTimer(); }, 1000);
     <script>
         // Initialize after dom ready
         var chartBasic = echarts.init(document.getElementById('basic_chart')); 
+        var chartThermo = echarts.init(document.getElementById('thermo_chart'));
+
+        option = {
+
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {          //--- Axis indicator, coordinate trigger effective
+                    type : 'shadow'        // ：'line' | 'shadow' --- The default is a straight line, select: 'line' | 'shadow'
+                },
+                formatter: function (params){
+                    return params[0].name + '<br/>'
+                           + params[0].seriesName + ' : ' + params[0].value + '<br/>'
+                           + params[1].seriesName + ' : ' + (params[1].value + params[0].value);
+                }
+            },
+            legend: {
+                selectedMode:false,
+                data:['Acutal', 'Forecast']
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['Cosco','CMA','APL','OOCL','Wanhai','Zim']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    boundaryGap: [0, 0.1]
+                }
+            ],
+            series : [
+                {
+                    name:'Acutal',
+                    type:'bar',
+                    stack: 'sum',
+                    barCategoryGap: '50%',
+                    itemStyle: {
+                        normal: {
+                            color: '#18d17f',
+                            barBorderColor: '#18d17f',
+                            barBorderWidth: 6,
+                            barBorderRadius:0,
+                            label : {
+                                show: true, position: 'insideTop'
+                            }
+                        }
+                    },
+                    data:[260, 200, 220, 120, 100, 80]
+                },
+                {
+                    name:'Forecast',
+                    type:'bar',
+                    stack: 'sum',
+                    itemStyle: {
+                        normal: {
+                            color: '#fff',
+                            barBorderColor: '#18d17f',
+                            barBorderWidth: 6,
+                            barBorderRadius:0,
+                            label : {
+                                show: true,
+                                position: 'top',
+                                formatter: function (params) {
+                                    for (var i = 0, l = option.xAxis[0].data.length; i < l; i++) {
+                                        if (option.xAxis[0].data[i] == params.name) {
+                                            return option.series[0].data[i] + params.value;
+                                        }
+                                    }
+                                },
+                                textStyle: {
+                                    color: '#18d17f'
+                                }
+                            }
+                        }
+                    },
+                    data:[40, 80, 50, 80,80, 70]
+                }
+            ]
+        };
+
+        // Load data into the ECharts instance
+        chartThermo.setOption(option);
+
+        $(window).on('resize', function(){
+            if(chartThermo != null && chartThermo != undefined){
+                chartThermo.resize();
+            }
+        });
+
+
+
+
+
+
+
+
+        var chartBasic = echarts.init(document.getElementById('basic_chart'));
 
 option = {
             tooltip : {
@@ -205,8 +513,7 @@ option = {
                 {
                     name:'Walking',
                     type:'bar',
-                    // data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                    data:{{context['data']|tojson}},
+                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
                     markPoint : {
                         data : [
                             {type : 'max', name: 'The maximum value'},
@@ -238,8 +545,8 @@ option = {
             ]
         };
 
-// Load data into the ECharts instance 
-chartBasic.setOption(option); 
+// Load data into the ECharts instance
+chartBasic.setOption(option);
 
     $(window).on('resize', function(){
     if(chartBasic != null && chartBasic != undefined){
@@ -249,6 +556,6 @@ chartBasic.setOption(option);
     </script>
     <!--  END CUSTOM STYLE FILE  -->
 
-    
+
 </body>
 </html>
